@@ -60,3 +60,6 @@ dkms.conf
 
 #Cartella di Build
 build/
+
+#Emacs .el
+.dir-locals.el

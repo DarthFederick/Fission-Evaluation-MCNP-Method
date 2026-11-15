@@ -1,5 +1,5 @@
 CC      := gcc
-CFLAGS  := -std=c11 -O3 -Wall -Wextra -Iinclude -MMD -MP
+CFLAGS  := -std=gnu11 -O3 -Wall -Wextra -Iinclude -MMD -MP
 LDFLAGS := -lm
 
 SRC_DIR   := src

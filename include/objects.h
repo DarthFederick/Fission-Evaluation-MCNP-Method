@@ -1,0 +1,30 @@
+#ifndef OBJECTS_H_
+#define OBJECTS_H_
+
+#include "vectors.h"
+
+typedef enum{
+  ACTIVE,
+  ABSORBED,
+  ESCAPED
+} neutron_status;
+
+typedef struct{
+
+  Vec3 pos;
+  Vec3 dir;
+  neutron_status status;
+
+} neutron;
+
+typedef struct{
+  double radius;
+
+  //Cross section for interaction
+  double sigma_t;
+  //Cross section for scattering
+  double sigma_s;
+
+} sphere;
+
+#endif // OBJECTS_H_
