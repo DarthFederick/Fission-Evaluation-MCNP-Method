@@ -2,6 +2,8 @@
 #include <math.h>
 
 #include "neutron_functions.h"
+#include "objects.h"
+#include "vectors.h"
 
 double path_length(double sigma_t){
   //Distance is measured in cm
@@ -26,5 +28,40 @@ Vec3 new_direction(void){
   direction.z = mu;
 
   return direction;
+
+}
+
+particle_status transport_neutron(sphere godiva){
+
+  double s = 0;
+  double p_scatter = godiva.sigma_s / godiva.sigma_t;
+
+  //Initializing neutron in (0, 0, 0)
+  particle neutron = {
+    .pos = {0},
+    .dir = {0},
+    .status = ACTIVE
+  };
+
+  //Giving the neutron a random motion direction
+  neutron.dir = new_direction();
+
+  //Neutron Life Cicle
+  while(neutron.status == ACTIVE){
+    s = path_length(godiva.sigma_t);
+    neutron.pos = Vec3_sum(neutron.pos, Vec3_scalar(neutron.dir, s));
+
+    if(Vec3_norm(neutron.pos) > godiva.radius){
+      neutron.status = ESCAPED;
+    } else {
+      if(drand48() < p_scatter){
+        neutron.dir = new_direction();
+      } else {
+        neutron.status = ABSORBED;
+      }
+    }
+  }
+
+  return neutron.status;
 
 }

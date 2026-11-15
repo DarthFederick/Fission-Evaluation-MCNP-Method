@@ -7,15 +7,15 @@ typedef enum{
   ACTIVE,
   ABSORBED,
   ESCAPED
-} neutron_status;
+} particle_status;
 
 typedef struct{
 
   Vec3 pos;
   Vec3 dir;
-  neutron_status status;
+  particle_status status;
 
-} neutron;
+} particle;
 
 typedef struct{
   double radius;
